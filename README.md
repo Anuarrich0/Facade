@@ -4,7 +4,7 @@ This Java 17 console application implements the assigned **Video Game Matchmakin
 
 ## Build, run, and reset
 
-On Windows, with Java 17+ and Maven 3.9+, run `./run.ps1` in PowerShell. It builds the runnable JAR and opens the menu. Alternatively, run `mvn package` then `java -jar target/matchmaking-facade-1.0.0.jar`. Optional JAR argument: a data directory. The default is `data/` in the current directory.
+On Windows, with Java 17+ and Maven 3.9+, run `.\run.cmd` in PowerShell. It builds the runnable JAR and opens the menu without changing PowerShell's script policy. Alternatively, run `mvn package` then `java -jar target/matchmaking-facade-1.0.0.jar`. Optional JAR argument: a data directory. The default is `data/` in the current directory.
 
 Run `mvn verify` for all tests and the JaCoCo coverage check. The HTML report is generated at `target/site/jacoco/index.html` (CSV and XML are beside it). A [coverage CSV snapshot](docs/coverage.csv) is also committed. JaCoCo checks at least 80% line coverage of the production code other than the interactive `Main` menu. The test run in this checkout has **11 passing tests and 200/201 covered lines (99.5%)**. The one uncovered line is a filesystem error path in `Store`. On this Windows account, Maven's test fork mangles the Cyrillic user path; running Maven from an ASCII `subst` drive works (example below). This is an environment issue, not a project dependency.
 
