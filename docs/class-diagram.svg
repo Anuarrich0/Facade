@@ -1,58 +1,276 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
-  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#334155"/></marker></defs>
-  <style>
-    text { font-family: Arial, sans-serif; fill:#0f172a; font-size:18px }
-    .title { font-size:26px; font-weight:bold }
-    .package { font-size:23px; font-weight:bold }
-    .small { font-size:15px; fill:#475569 }
-    .box { fill:#fff; stroke:#334155; stroke-width:2; rx:8 }
-    .group { fill:#f1f5f9; stroke:#94a3b8; stroke-width:2; rx:12 }
-    .edge { stroke:#334155; stroke-width:2; fill:none; marker-end:url(#arrow) }
-  </style>
-  <text x="32" y="38" class="title">Variant 16  Video Game Matchmaking  Class Diagram</text>
-
-  <rect x="670" y="58" width="260" height="54" class="box"/><text x="708" y="91">Main  Client CLI</text>
-  <rect x="280" y="166" width="320" height="66" class="box"/><text x="320" y="204">MatchmakingFacade</text>
-  <rect x="1000" y="166" width="310" height="66" class="box"/><text x="1072" y="204">AdminFacade</text>
-  <path d="M 738 112 L 510 166" class="edge"/><path d="M 862 112 L 1080 166" class="edge"/>
-  <path d="M 1000 199 L 600 199" class="edge"/>
-  <text x="722" y="190" class="small">requires / compensates</text>
-
-  <rect x="645" y="260" width="310" height="55" class="box"/><text x="760" y="294">Workflow</text>
-  <path d="M 500 232 L 705 260" class="edge"/>
-
-  <rect x="35" y="425" width="490" height="445" class="group"/>
-  <text x="64" y="461" class="package">A  Party reservation</text>
-  <rect x="70" y="485" width="420" height="64" class="box"/><text x="93" y="515">PartyService</text><text x="93" y="537" class="small">reserve / cancel / inspect</text>
-  <rect x="70" y="580" width="420" height="55" class="box"/><text x="93" y="613">RatingRule  business logic</text>
-  <rect x="70" y="665" width="420" height="55" class="box"/><text x="93" y="698">PartyRepository  persistence gateway</text>
-  <rect x="70" y="750" width="420" height="85" class="box"/><text x="93" y="785">PartyTicket  entity</text><text x="93" y="812" class="small">NEW  →  RESERVED  →  CANCELLED</text>
-
-  <rect x="555" y="425" width="490" height="445" class="group"/>
-  <text x="584" y="461" class="package">B  Server allocation</text>
-  <rect x="590" y="485" width="420" height="64" class="box"/><text x="613" y="515">ServerService</text><text x="613" y="537" class="small">allocate / release / inspect</text>
-  <rect x="590" y="580" width="420" height="55" class="box"/><text x="613" y="613">LatencyRule  business logic</text>
-  <rect x="590" y="665" width="420" height="55" class="box"/><text x="613" y="698">ServerRepository  persistence gateway</text>
-  <rect x="590" y="750" width="420" height="85" class="box"/><text x="613" y="785">ServerAllocation  entity</text><text x="613" y="812" class="small">NEW  →  ALLOCATED  →  RELEASED</text>
-
-  <rect x="1075" y="425" width="490" height="445" class="group"/>
-  <text x="1104" y="461" class="package">C  Match confirmation</text>
-  <rect x="1110" y="485" width="420" height="64" class="box"/><text x="1133" y="515">MatchService</text><text x="1133" y="537" class="small">confirm / revoke / inspect</text>
-  <rect x="1110" y="580" width="420" height="55" class="box"/><text x="1133" y="613">AntiCheatRule  business logic</text>
-  <rect x="1110" y="665" width="420" height="55" class="box"/><text x="1133" y="698">MatchRepository  persistence gateway</text>
-  <rect x="1110" y="750" width="420" height="85" class="box"/><text x="1133" y="785">MatchRecord  entity</text><text x="1133" y="812" class="small">NEW  →  CONFIRMED  →  REVOKED</text>
-
-  <path d="M 350 232 L 280 485" class="edge"/><path d="M 440 232 L 800 485" class="edge"/><path d="M 540 232 L 1320 485" class="edge"/>
-  <path d="M 1090 232 L 400 485" class="edge"/><path d="M 1155 232 L 900 485" class="edge"/><path d="M 1240 232 L 1400 485" class="edge"/>
-  <path d="M 280 549 L 280 580" class="edge"/><path d="M 355 549 L 355 665" class="edge"/><path d="M 160 549 L 160 750" class="edge"/>
-  <path d="M 800 549 L 800 580" class="edge"/><path d="M 875 549 L 875 665" class="edge"/><path d="M 680 549 L 680 750" class="edge"/>
-  <path d="M 1320 549 L 1320 580" class="edge"/><path d="M 1395 549 L 1395 665" class="edge"/><path d="M 1200 549 L 1200 750" class="edge"/>
-  <path d="M 280 720 L 280 750" class="edge"/><path d="M 800 720 L 800 750" class="edge"/><path d="M 1320 720 L 1320 750" class="edge"/>
-
-  <rect x="650" y="920" width="300" height="55" class="box"/><text x="674" y="955">Store  atomic JSON I/O</text>
-  <path d="M 180 720 L 180 905 L 700 920" class="edge"/>
-  <path d="M 800 720 L 800 920" class="edge"/>
-  <path d="M 1420 720 L 1420 905 L 900 920" class="edge"/>
-  <path d="M 600 220 L 1570 220 L 1570 905 L 950 943" class="edge"/>
-  <text x="30" y="985" class="small">Arrows show direct calls or persisted entity use. The three subsystems have no dependencies on each other.</text>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="1710" height="1050" preserveAspectRatio="xMinYMin meet" viewBox="0 0 1710 1050" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="1710" height="1050"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-1050)" style="clip-path: url(#clip)">
+		<g transform="">
+			<text x="24" y="1020" style="font-family: Arial-Bold; font-size: 25px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,2040) scale(1,-1)">Video Game Matchmaking - complete class structure</text>
+			<text x="24" y="995" style="font-family: Arial; font-size: 13px;fill: rgb(32%,38%,44%); stroke:none;" transform="translate(0,1990) scale(1,-1)">Repeated class names refer to the same objects. Constructor wiring in Main is omitted; runtime relations are shown.</text>
+			<g transform=" matrix(1,0,0,1,24,515)">
+				<g transform="">
+					<text x="12" y="432" style="font-family: Arial-Bold; font-size: 16px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,864) scale(1,-1)">1  Client and common facade</text>
+					<text x="12" y="414" style="font-family: Arial; font-size: 10px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,828) scale(1,-1)">Solid arrow: stored reference. Dashed arrow: use or creation.</text>
+					<rect x="185" y="345" width="170" height="55" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="194" y="381" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,762) scale(1,-1)">Main</text>
+					<path d="M 185,374 L 355,374 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="194" y="357" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,714) scale(1,-1)">+main(args)</text>
+					<rect x="100" y="232" width="340" height="93" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="109" y="306" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,612) scale(1,-1)">MatchmakingFacade</text>
+					<path d="M 100,299 L 440,299 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="109" y="282" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,564) scale(1,-1)">-parties; -servers; -matches; -store</text>
+					<text x="109" y="268" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,536) scale(1,-1)">+begin; +advance; +run; +compensate; +require</text>
+					<polyline points="270 345, 270 325" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+					<polygon points="270 325, 266 333, 274 333" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<rect x="10" y="103" width="150" height="62" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="19" y="146" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,292) scale(1,-1)">PartyService</text>
+					<path d="M 10,139 L 160,139 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="19" y="122" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,244) scale(1,-1)">+reserve; +cancel; +inspect</text>
+					<rect x="195" y="103" width="150" height="62" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="204" y="146" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,292) scale(1,-1)">ServerService</text>
+					<path d="M 195,139 L 345,139 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="204" y="122" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,244) scale(1,-1)">+allocate; +release; +inspect</text>
+					<rect x="380" y="103" width="150" height="62" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="389" y="146" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,292) scale(1,-1)">MatchService</text>
+					<path d="M 380,139 L 530,139 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="389" y="122" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,244) scale(1,-1)">+confirm; +revoke; +inspect</text>
+					<polyline points="190 232, 85 165" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="85 165, 89.59234 172.6753, 93.89565 165.9313" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="270 232, 270 165" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="270 165, 266 173, 274 173" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="350 232, 455 165" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="455 165, 446.1043 165.9313, 450.4077 172.6753" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<rect x="10" y="8" width="235" height="57" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="19" y="46" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,92) scale(1,-1)">Store</text>
+					<path d="M 10,39 L 245,39 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="19" y="22" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,44) scale(1,-1)">+read; +write</text>
+					<rect x="290" y="8" width="235" height="65" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="299" y="54" style="font-family: Arial; font-size: 9px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,108) scale(1,-1)">&lt;&lt;record&gt;&gt;</text>
+					<text x="299" y="39" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,78) scale(1,-1)">Workflow</text>
+					<path d="M 290,32 L 525,32 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="299" y="15" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,30) scale(1,-1)">request data and chain status</text>
+					<polyline points="100 280, 3 280, 3 81, 120 81, 120 65" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="120 65, 116 73, 124 73" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="440 280, 537 280, 537 81, 410 81, 410 73" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+					<polygon points="410 73, 406 81, 414 81" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<text x="10" y="86" style="font-family: Arial; font-size: 9px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,172) scale(1,-1)">progress JSON</text>
+					<text x="365" y="86" style="font-family: Arial; font-size: 9px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,172) scale(1,-1)">creates / returns</text>
+				</g>
+			</g>
+			<g transform=" matrix(1,0,0,1,590,515)">
+				<g transform="">
+					<text x="12" y="432" style="font-family: Arial-Bold; font-size: 16px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,864) scale(1,-1)">2  Administrative facade</text>
+					<text x="12" y="414" style="font-family: Arial; font-size: 10px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,828) scale(1,-1)">The same service objects are reused; there are no extra subsystems.</text>
+					<rect x="185" y="345" width="170" height="50" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="194" y="376" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,752) scale(1,-1)">Main</text>
+					<path d="M 185,369 L 355,369 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="194" y="352" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,704) scale(1,-1)">+main(args)</text>
+					<rect x="100" y="225" width="340" height="80" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="109" y="286" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,572) scale(1,-1)">AdminFacade</text>
+					<path d="M 100,279 L 440,279 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="109" y="262" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,524) scale(1,-1)">-workflow; -parties; -servers; -matches</text>
+					<text x="109" y="248" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,496) scale(1,-1)">+inspect(id); +compensate(id)</text>
+					<polyline points="270 345, 270 305" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+					<polygon points="270 305, 266 313, 274 313" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<rect x="0" y="65" width="120" height="65" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="9" y="111" style="font-family: Arial-Bold; font-size: 10.369620253164557px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,222) scale(1,-1)">MatchmakingFacade</text>
+					<path d="M 0,104 L 120,104 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="9" y="87" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,174) scale(1,-1)">+require; +compensate</text>
+					<rect x="140" y="65" width="120" height="65" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="149" y="111" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,222) scale(1,-1)">PartyService</text>
+					<path d="M 140,104 L 260,104 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="149" y="87" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,174) scale(1,-1)">+inspect</text>
+					<rect x="280" y="65" width="120" height="65" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="289" y="111" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,222) scale(1,-1)">ServerService</text>
+					<path d="M 280,104 L 400,104 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="289" y="87" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,174) scale(1,-1)">+inspect</text>
+					<rect x="420" y="65" width="120" height="65" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="429" y="111" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,222) scale(1,-1)">MatchService</text>
+					<path d="M 420,104 L 540,104 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="429" y="87" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,174) scale(1,-1)">+inspect</text>
+					<polyline points="170 225, 60 130" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="60 130, 63.4401 138.2563, 68.66906 132.2017" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="235 225, 200 130" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="200 130, 199.0123 138.8896, 206.519 136.1239" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="300 225, 340 130" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="340 130, 333.209 135.8209, 340.5821 138.9253" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="365 225, 480 130" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="480 130, 471.2848 132.0112, 476.3798 138.1789" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<text x="12" y="35" style="font-family: Arial; font-size: 11px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,70) scale(1,-1)">inspect: combines persisted states into one result.</text>
+					<text x="12" y="15" style="font-family: Arial; font-size: 10.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,30) scale(1,-1)">compensate: delegates the reverse sequence to the common facade.</text>
+				</g>
+			</g>
+			<g transform=" matrix(1,0,0,1,1156,515)">
+				<g transform="">
+					<text x="12" y="432" style="font-family: Arial-Bold; font-size: 16px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,864) scale(1,-1)">3  Request data, JSON and exceptions</text>
+					<text x="12" y="414" style="font-family: Arial; font-size: 10px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,828) scale(1,-1)">RuntimeException is built into Java; it is not a project source file.</text>
+					<rect x="140" y="320" width="260" height="75" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="149" y="376" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,752) scale(1,-1)">MatchmakingFacade</text>
+					<path d="M 140,369 L 400,369 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="149" y="352" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,704) scale(1,-1)">+require; +begin; +advance; +compensate</text>
+					<rect x="10" y="130" width="245" height="130" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="19" y="241" style="font-family: Arial; font-size: 9px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,482) scale(1,-1)">&lt;&lt;record&gt;&gt;</text>
+					<text x="19" y="226" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,452) scale(1,-1)">Workflow</text>
+					<path d="M 10,219 L 255,219 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="19" y="202" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,404) scale(1,-1)">-id; -player</text>
+					<text x="19" y="188" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,376) scale(1,-1)">-rating; -partySize; -ping</text>
+					<text x="19" y="174" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,348) scale(1,-1)">-suspicious; -status</text>
+					<text x="19" y="160" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,320) scale(1,-1)">+withStatus(next)</text>
+					<rect x="290" y="160" width="240" height="100" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="299" y="241" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,482) scale(1,-1)">Store</text>
+					<path d="M 290,234 L 530,234 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="299" y="217" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,434) scale(1,-1)">-root; -json (Gson)</text>
+					<text x="299" y="203" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,406) scale(1,-1)">+read(kind, id, type)</text>
+					<text x="299" y="189" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,378) scale(1,-1)">+write(kind, id, value)</text>
+					<polyline points="210 320, 132 260" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+					<polygon points="132 260, 135.9021 268.0482, 140.7798 261.7072" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="330 320, 410 260" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="410 260, 401.2 261.6, 406 268" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<rect x="10" y="20" width="245" height="55" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="19" y="56" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,112) scale(1,-1)">StageRejected</text>
+					<path d="M 10,49 L 255,49 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="19" y="32" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,64) scale(1,-1)">+StageRejected(message)</text>
+					<rect x="310" y="20" width="220" height="55" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="319" y="56" style="font-family: Arial; font-size: 9px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,112) scale(1,-1)">&lt;&lt;Java&gt;&gt;</text>
+					<text x="319" y="41" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,82) scale(1,-1)">RuntimeException</text>
+					<path d="M 310,34 L 530,34 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<polyline points="140 365, 3 365, 3 47, 10 47" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+					<polygon points="10 47, 2 43, 2 51" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="255 47, 310 47" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="310 47, 302 43, 302 51" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="12" y="102" style="font-family: Arial; font-size: 10px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,204) scale(1,-1)">Rules and services throw StageRejected; the facade catches it.</text>
+					<text x="12" y="87" style="font-family: Arial; font-size: 10px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,174) scale(1,-1)">The triangle points to the parent class (extends).</text>
+				</g>
+			</g>
+			<g transform=" matrix(1,0,0,1,24,40)">
+				<g transform="">
+					<text x="12" y="432" style="font-family: Arial-Bold; font-size: 16px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,864) scale(1,-1)">4  A: Party reservation</text>
+					<text x="12" y="414" style="font-family: Arial; font-size: 10px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,828) scale(1,-1)">The subsystem does not import or call either of the other two.</text>
+					<rect x="145" y="300" width="250" height="85" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="154" y="366" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,732) scale(1,-1)">PartyService</text>
+					<path d="M 145,359 L 395,359 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="154" y="342" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,684) scale(1,-1)">-repository; -rule</text>
+					<text x="154" y="328" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,656) scale(1,-1)">+reserve; +cancel; +inspect</text>
+					<rect x="15" y="175" width="235" height="65" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="24" y="221" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,442) scale(1,-1)">RatingRule</text>
+					<path d="M 15,214 L 250,214 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="24" y="197" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,394) scale(1,-1)">+check(rating, size)</text>
+					<rect x="290" y="155" width="235" height="85" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="299" y="221" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,442) scale(1,-1)">PartyRepository</text>
+					<path d="M 290,214 L 525,214 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="299" y="197" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,394) scale(1,-1)">-store</text>
+					<text x="299" y="183" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,366) scale(1,-1)">+find(id); +save(entity)</text>
+					<rect x="15" y="9" width="235" height="96" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="24" y="86" style="font-family: Arial; font-size: 9px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,172) scale(1,-1)">&lt;&lt;record&gt;&gt;</text>
+					<text x="24" y="71" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,142) scale(1,-1)">PartyTicket</text>
+					<path d="M 15,64 L 250,64 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="24" y="47" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,94) scale(1,-1)">-id; -player; -rating; -size; -status</text>
+					<text x="24" y="33" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,66) scale(1,-1)">+reserve(); +cancel()</text>
+					<text x="24" y="19" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,38) scale(1,-1)">NEW -&gt; RESERVED -&gt; CANCELLED</text>
+					<rect x="290" y="20" width="235" height="65" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="299" y="66" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,132) scale(1,-1)">Store</text>
+					<path d="M 290,59 L 525,59 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="299" y="42" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,84) scale(1,-1)">+read(kind,...); +write(kind,...)</text>
+					<polyline points="210 300, 132 240" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="132 240, 135.9021 248.0482, 140.7798 241.7072" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="330 300, 407 240" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="407 240, 398.231 241.762, 403.1482 248.0724" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="145 350, 3 350, 3 58, 15 58" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+					<polygon points="15 58, 7 54, 7 62" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="290 193, 268 193, 268 50, 250 50" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+					<polygon points="250 50, 258 54, 258 46" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="407 155, 407 85" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="407 85, 403 93, 411 93" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+				</g>
+			</g>
+			<g transform=" matrix(1,0,0,1,590,40)">
+				<g transform="">
+					<text x="12" y="432" style="font-family: Arial-Bold; font-size: 16px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,864) scale(1,-1)">5  B: Server allocation</text>
+					<text x="12" y="414" style="font-family: Arial; font-size: 10px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,828) scale(1,-1)">The subsystem does not import or call either of the other two.</text>
+					<rect x="145" y="300" width="250" height="85" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="154" y="366" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,732) scale(1,-1)">ServerService</text>
+					<path d="M 145,359 L 395,359 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="154" y="342" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,684) scale(1,-1)">-repository; -rule</text>
+					<text x="154" y="328" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,656) scale(1,-1)">+allocate; +release; +inspect</text>
+					<rect x="15" y="175" width="235" height="65" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="24" y="221" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,442) scale(1,-1)">LatencyRule</text>
+					<path d="M 15,214 L 250,214 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="24" y="197" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,394) scale(1,-1)">+check(ping)</text>
+					<rect x="290" y="155" width="235" height="85" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="299" y="221" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,442) scale(1,-1)">ServerRepository</text>
+					<path d="M 290,214 L 525,214 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="299" y="197" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,394) scale(1,-1)">-store</text>
+					<text x="299" y="183" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,366) scale(1,-1)">+find(id); +save(entity)</text>
+					<rect x="15" y="9" width="235" height="96" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="24" y="86" style="font-family: Arial; font-size: 9px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,172) scale(1,-1)">&lt;&lt;record&gt;&gt;</text>
+					<text x="24" y="71" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,142) scale(1,-1)">ServerAllocation</text>
+					<path d="M 15,64 L 250,64 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="24" y="47" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,94) scale(1,-1)">-id; -ping; -status</text>
+					<text x="24" y="33" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,66) scale(1,-1)">+allocate(); +release()</text>
+					<text x="24" y="19" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,38) scale(1,-1)">NEW -&gt; ALLOCATED -&gt; RELEASED</text>
+					<rect x="290" y="20" width="235" height="65" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="299" y="66" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,132) scale(1,-1)">Store</text>
+					<path d="M 290,59 L 525,59 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="299" y="42" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,84) scale(1,-1)">+read(kind,...); +write(kind,...)</text>
+					<polyline points="210 300, 132 240" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="132 240, 135.9021 248.0482, 140.7798 241.7072" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="330 300, 407 240" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="407 240, 398.231 241.762, 403.1482 248.0724" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="145 350, 3 350, 3 58, 15 58" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+					<polygon points="15 58, 7 54, 7 62" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="290 193, 268 193, 268 50, 250 50" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+					<polygon points="250 50, 258 54, 258 46" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="407 155, 407 85" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="407 85, 403 93, 411 93" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+				</g>
+			</g>
+			<g transform=" matrix(1,0,0,1,1156,40)">
+				<g transform="">
+					<text x="12" y="432" style="font-family: Arial-Bold; font-size: 16px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,864) scale(1,-1)">6  C: Match confirmation</text>
+					<text x="12" y="414" style="font-family: Arial; font-size: 10px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,828) scale(1,-1)">The subsystem does not import or call either of the other two.</text>
+					<rect x="145" y="300" width="250" height="85" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="154" y="366" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,732) scale(1,-1)">MatchService</text>
+					<path d="M 145,359 L 395,359 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="154" y="342" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,684) scale(1,-1)">-repository; -rule</text>
+					<text x="154" y="328" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,656) scale(1,-1)">+confirm; +revoke; +inspect</text>
+					<rect x="15" y="175" width="235" height="65" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="24" y="221" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,442) scale(1,-1)">AntiCheatRule</text>
+					<path d="M 15,214 L 250,214 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="24" y="197" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,394) scale(1,-1)">+check(suspicious)</text>
+					<rect x="290" y="155" width="235" height="85" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="299" y="221" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,442) scale(1,-1)">MatchRepository</text>
+					<path d="M 290,214 L 525,214 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="299" y="197" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,394) scale(1,-1)">-store</text>
+					<text x="299" y="183" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,366) scale(1,-1)">+find(id); +save(entity)</text>
+					<rect x="15" y="9" width="235" height="96" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="24" y="86" style="font-family: Arial; font-size: 9px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,172) scale(1,-1)">&lt;&lt;record&gt;&gt;</text>
+					<text x="24" y="71" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,142) scale(1,-1)">MatchRecord</text>
+					<path d="M 15,64 L 250,64 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="24" y="47" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,94) scale(1,-1)">-id; -suspicious; -status</text>
+					<text x="24" y="33" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,66) scale(1,-1)">+confirm(); +revoke()</text>
+					<text x="24" y="19" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,38) scale(1,-1)">NEW -&gt; CONFIRMED -&gt; REVOKED</text>
+					<rect x="290" y="20" width="235" height="65" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+					<text x="299" y="66" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,132) scale(1,-1)">Store</text>
+					<path d="M 290,59 L 525,59 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
+					<text x="299" y="42" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,84) scale(1,-1)">+read(kind,...); +write(kind,...)</text>
+					<polyline points="210 300, 132 240" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="132 240, 135.9021 248.0482, 140.7798 241.7072" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="330 300, 407 240" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="407 240, 398.231 241.762, 403.1482 248.0724" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="145 350, 3 350, 3 58, 15 58" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+					<polygon points="15 58, 7 54, 7 62" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="290 193, 268 193, 268 50, 250 50" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+					<polygon points="250 50, 258 54, 258 46" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+					<polyline points="407 155, 407 85" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
+					<polygon points="407 85, 403 93, 411 93" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
+				</g>
+			</g>
+			<text x="24" y="24" style="font-family: Arial; font-size: 13px;fill: rgb(32%,38%,44%); stroke:none;" transform="translate(0,48) scale(1,-1)">Solid = stored reference; dashed = dependency; hollow triangle = inheritance. + public; - private. JSON files are storage, not classes.</text>
+		</g>
+	</g>
 </svg>
