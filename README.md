@@ -6,7 +6,7 @@ This Java 17 console application implements the assigned **Video Game Matchmakin
 
 On Windows, with Java 17+ and Maven 3.9+, run `.\run.cmd` in PowerShell. It builds the runnable JAR and opens the menu without changing PowerShell's script policy. Alternatively, run `mvn package` then `java -jar target/matchmaking-facade-1.0.0.jar`. Optional JAR argument: a data directory. The default is `data/` in the current directory.
 
-Run `mvn verify` for all tests and the JaCoCo coverage check. The HTML report is generated at `target/site/jacoco/index.html` (CSV and XML are beside it). A [coverage CSV snapshot](docs/coverage.csv) is also committed. JaCoCo checks at least 80% line coverage of the production code other than the interactive `Main` menu. The project includes **14 tests**, including console input, both compensation depths, and continuation after restarting the menu. On this Windows account, Maven's test fork mangles the Cyrillic user path; running Maven from an ASCII `subst` drive works (example below). This is an environment issue, not a project dependency.
+Run `mvn verify` for all tests and the JaCoCo coverage check. The HTML report is generated at `target/site/jacoco/index.html` (CSV and XML are beside it). A [coverage CSV snapshot](docs/coverage.csv) is also committed. JaCoCo checks at least 80% line coverage of the production code other than the interactive `Main` menu. The project includes **17 tests**, including console input, both compensation depths, restart, JSON round trips, and corrupted-file handling. On this Windows account, Maven's test fork mangles the Cyrillic user path; running Maven from an ASCII `subst` drive works (example below). This is an environment issue, not a project dependency.
 
 ```powershell
 $projectPath = (Get-Location).Path
@@ -47,7 +47,17 @@ For a restart demonstration, choose **1** and answer **no** to **Run all steps n
 
 `PartyService` uses `RatingRule`, `PartyTicket`, and `PartyRepository`. `ServerService` uses `LatencyRule`, `ServerAllocation`, and `ServerRepository`. `MatchService` uses `AntiCheatRule`, `MatchRecord`, and `MatchRepository`. Each package has its own entity, pure decision class, service, and gateway. The entities enforce legal transitions themselves; the facade cannot set a status directly. None of the three packages imports another subsystem.
 
-Each repository writes its own `.properties` file under `data/party`, `data/server`, or `data/match`. `WorkflowRepository` separately writes `data/workflow/<id>.properties`. `Store` writes a temporary file and atomically replaces the record. An app restart creates new objects that read those files. This is durable local state, not a static map.
+Each repository writes its own JSON file under `data/party`, `data/server`, or `data/match`. `WorkflowRepository` separately writes `data/workflow/<id>.json`. The repositories directly call `Store.read(..., Entity.class)` and `Store.write(...)`; Gson converts the entity to readable JSON and back, so there is no manual field mapping. Gson is included in the executable JAR. `Store` writes UTF-8 to a temporary file and atomically replaces the record. An app restart creates new objects that read those files. Malformed or empty JSON causes an explicit error rather than being treated as a missing record. The previous `.properties` format is no longer used; the checked default data directory contained no saved records when the format changed.
+
+For example, a saved server allocation is a normal JSON object:
+
+```json
+{
+  "id": "game1",
+  "ping": 50,
+  "status": "ALLOCATED"
+}
+```
 
 The common `MatchmakingFacade` persists `PENDING_B`, `PENDING_C`, `COMPLETED`, `COMPENSATING`, or `COMPENSATED`. It checks the *actual saved entities* before advancing or undoing. If B rejects high latency after A committed, it cancels A. If C rejects the player after A and B committed, it releases B then cancels A. The `COMPENSATING` state lets a later run finish an interrupted manual undo. A stale progress marker after a saved B or C entity does not duplicate that entity. `AdminFacade` offers only inspection and manual compensation.
 

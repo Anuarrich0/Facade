@@ -1,6 +1,10 @@
 package matchmaking.match;
 
 public record MatchRecord(String id, boolean suspicious, Status status) {
+    public MatchRecord {
+        java.util.Objects.requireNonNull(id, "id");
+        java.util.Objects.requireNonNull(status, "status");
+    }
     public enum Status { NEW, CONFIRMED, REVOKED }
     public MatchRecord confirm() {
         if (status != Status.NEW) throw new IllegalStateException("Match cannot be confirmed from " + status);

@@ -1,6 +1,10 @@
 package matchmaking.server;
 
 public record ServerAllocation(String id, int ping, Status status) {
+    public ServerAllocation {
+        java.util.Objects.requireNonNull(id, "id");
+        java.util.Objects.requireNonNull(status, "status");
+    }
     public enum Status { NEW, ALLOCATED, RELEASED }
     public ServerAllocation allocate() {
         if (status != Status.NEW) throw new IllegalStateException("Server cannot be allocated from " + status);

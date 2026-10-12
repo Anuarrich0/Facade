@@ -46,11 +46,14 @@ class MainTest {
         Store store = new Store(disk);
         String b = created[1].split("\\R")[0];
         String c = created[2].split("\\R")[0];
-        assertEquals("CANCELLED", store.read("party", b).getProperty("status"));
-        assertTrue(store.read("server", b).isEmpty());
-        assertEquals("RELEASED", store.read("server", c).getProperty("status"));
-        assertEquals("CANCELLED", store.read("party", c).getProperty("status"));
-        assertTrue(store.read("match", c).isEmpty());
+        assertEquals(matchmaking.party.PartyTicket.Status.CANCELLED,
+                store.read("party", b, matchmaking.party.PartyTicket.class).status());
+        assertNull(store.read("server", b, matchmaking.server.ServerAllocation.class));
+        assertEquals(matchmaking.server.ServerAllocation.Status.RELEASED,
+                store.read("server", c, matchmaking.server.ServerAllocation.class).status());
+        assertEquals(matchmaking.party.PartyTicket.Status.CANCELLED,
+                store.read("party", c, matchmaking.party.PartyTicket.class).status());
+        assertNull(store.read("match", c, matchmaking.match.MatchRecord.class));
     }
 
     @Test void restartedMenuContinuesSavedRequestAndShowsCompensation() {

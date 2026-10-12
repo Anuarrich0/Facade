@@ -51,7 +51,7 @@
   <path d="M 1320 549 L 1320 580" class="edge"/><path d="M 1395 549 L 1395 665" class="edge"/><path d="M 1200 549 L 1200 750" class="edge"/>
   <path d="M 280 720 L 280 750" class="edge"/><path d="M 800 720 L 800 750" class="edge"/><path d="M 1320 720 L 1320 750" class="edge"/>
 
-  <rect x="650" y="920" width="300" height="55" class="box"/><text x="709" y="955">Store  atomic file I/O</text>
+  <rect x="650" y="920" width="300" height="55" class="box"/><text x="674" y="955">Store  atomic JSON I/O</text>
   <path d="M 180 720 L 180 905 L 700 920" class="edge"/>
   <path d="M 800 720 L 800 920" class="edge"/>
   <path d="M 1420 720 L 1420 905 L 900 920" class="edge"/>
