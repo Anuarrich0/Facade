@@ -6,7 +6,7 @@ This Java 17 console application implements the assigned **Video Game Matchmakin
 
 On Windows, with Java 17+ and Maven 3.9+, run `.\run.cmd` in PowerShell. It builds the runnable JAR and opens the menu without changing PowerShell's script policy. Alternatively, run `mvn package` then `java -jar target/matchmaking-facade-1.0.0.jar`. Optional JAR argument: a data directory. The default is `data/` in the current directory.
 
-Run `mvn verify` for all tests and the JaCoCo coverage check. The HTML report is generated at `target/site/jacoco/index.html` (CSV and XML are beside it). A [coverage CSV snapshot](docs/coverage.csv) is also committed. JaCoCo checks at least 80% line coverage of the production code other than the interactive `Main` menu. The test run in this checkout has **11 passing tests and 200/201 covered lines (99.5%)**. The one uncovered line is a filesystem error path in `Store`. On this Windows account, Maven's test fork mangles the Cyrillic user path; running Maven from an ASCII `subst` drive works (example below). This is an environment issue, not a project dependency.
+Run `mvn verify` for all tests and the JaCoCo coverage check. The HTML report is generated at `target/site/jacoco/index.html` (CSV and XML are beside it). A [coverage CSV snapshot](docs/coverage.csv) is also committed. JaCoCo checks at least 80% line coverage of the production code other than the interactive `Main` menu. The project includes **14 tests**, including console input, both compensation depths, and continuation after restarting the menu. On this Windows account, Maven's test fork mangles the Cyrillic user path; running Maven from an ASCII `subst` drive works (example below). This is an environment issue, not a project dependency.
 
 ```powershell
 $projectPath = (Get-Location).Path
@@ -23,15 +23,25 @@ To reset for a clean live demo, close the app and delete only its `data/` direct
 
 ## Live demo
 
-Menu option **1** runs all three stages and prints the workflow ID and persisted states. Use these realistic inputs:
+The menu contains only workflow and administration operations:
+
+| Option | Action |
+|---|---|
+| 1 | Create a request; choose whether to run all stages immediately or stop after A |
+| 2 | Perform the next saved step for a request ID |
+| 3 | Inspect saved states for a request ID |
+| 4 | Manually compensate a request ID |
+| 0 | Exit |
+
+For a full run, choose **1**, enter the player data, and answer **yes** to **Run all steps now?** The application prints the ID before B or C can reject the request, and displays the actual saved state after success or compensation. Both failures are triggered through ordinary input; no separate demo buttons or preset requests are needed.
 
 | Scenario | Player | Rating | Party size | Ping | Suspicious | Final persisted state |
 |---|---|---:|---:|---:|---|---|
-| Success | Anuar | 1500 | 2 | 40 | false | COMPLETED / RESERVED / ALLOCATED / CONFIRMED |
-| B rejects high latency | Anuar | 1500 | 2 | 121 | false | COMPENSATED / CANCELLED / NONE / NONE |
-| C rejects suspicious player | Anuar | 1500 | 2 | 40 | true | COMPENSATED / CANCELLED / RELEASED / NONE |
+| Success | Anuar | 1500 | 2 | 40 | no | COMPLETED / RESERVED / ALLOCATED / CONFIRMED |
+| B rejects high latency | Anuar | 1500 | 2 | 121 | no | COMPENSATED / CANCELLED / NONE / NONE |
+| C rejects suspicious player | Anuar | 1500 | 2 | 40 | yes | COMPENSATED / CANCELLED / RELEASED / NONE |
 
-Option **2** stops after A has persisted a reservation. Write down the printed ID. Option **4** inspects it. Exit with **0**, start the app again, then option **3** advances B; inspect again and advance C. This demonstrates recovery from disk. Option **5** manually compensates a completed or interrupted workflow, then inspection shows `REVOKED / RELEASED / CANCELLED` for C/B/A. The ID is printed before any B or C failure, so rejected workflows can be inspected too.
+For a restart demonstration, choose **1** and answer **no** to **Run all steps now?** A is saved and the app stops at `PENDING_B`. Copy the ID, exit with **0**, restart, and choose **3** to inspect that ID. Choose **2** to perform B, inspect again, then **2** to perform C. Option **4** manually compensates a completed or interrupted workflow; a completed request ends with `REVOKED / RELEASED / CANCELLED` for C/B/A. An invalid rating such as `-1` demonstrates rejection at A before any subsystem entity is committed.
 
 ## Design and persistence
 

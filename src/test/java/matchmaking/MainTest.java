@@ -29,8 +29,8 @@ class MainTest {
     }
 
     @Test void fullMatchRetriesInvalidRating() {
-        String output = operateMenu("1\nAnuar\ninvalid\n1500\n2\n50\nno\n4\n\n0\n");
-        assertTrue(output.contains("Enter a whole number from 0 to 3000."));
+        String output = operateMenu("1\nAnuar\ninvalid\n1500\n2\n50\nno\nyes\n0\n");
+        assertTrue(output.contains("Enter a whole number."));
         assertTrue(output.contains("Match (C): confirmed"));
         String id = output.split("Request created. ID: ")[1].split("\\R")[0];
         Workflow saved = new WorkflowRepository(new Store(disk)).find(id);
@@ -38,10 +38,10 @@ class MainTest {
         assertEquals(Workflow.Status.COMPLETED, saved.status());
     }
 
-    @Test void bothFailureDemosShowActualPersistedCompensation() {
-        String output = operateMenu("6\nPlayer\n1500\n2\n7\nPlayer\n1500\n2\n0\n");
-        assertTrue(output.contains("Ping exceeds 120 ms"));
-        assertTrue(output.contains("Anti-cheat rejected the player"));
+    @Test void realInputTriggersBothCompensationDepths() {
+        String output = operateMenu("1\nPlayer\n1500\n2\n150\nno\nyes\n1\nPlayer\n1500\n2\n50\nyes\nyes\n0\n");
+        assertTrue(output.contains("ping above 120 ms"));
+        assertTrue(output.contains("Anti-cheat rejected a suspicious player"));
         String[] created = output.split("Request created. ID: ");
         Store store = new Store(disk);
         String b = created[1].split("\\R")[0];
@@ -53,8 +53,11 @@ class MainTest {
         assertTrue(store.read("match", c).isEmpty());
     }
 
-    @Test void stepMenuReusesLastIdAndShowsStateAfterRejection() {
-        String output = operateMenu("2\nPlayer\n1500\n2\n50\nyes\n3\n\n3\n\n4\n\n0\n");
+    @Test void restartedMenuContinuesSavedRequestAndShowsCompensation() {
+        String initial = operateMenu("1\nPlayer\n1500\n2\n50\nyes\nno\n0\n");
+        String id = initial.split("Request created. ID: ")[1].split("\\R")[0];
+        String output = operateMenu("3\n" + id + "\n2\n" + id + "\n2\n" + id + "\n0\n");
+        assertTrue(output.contains("waiting for server allocation"));
         assertTrue(output.contains("Server (B): allocated"));
         assertTrue(output.contains("Server (B): released"));
         assertTrue(output.contains("Request: cancelled"));

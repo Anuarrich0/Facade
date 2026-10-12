@@ -12,7 +12,7 @@ matchmaking-facade,matchmaking.server,ServerService,0,63,0,4,0,12,0,6,0,4
 matchmaking-facade,matchmaking,MatchmakingFacade,11,257,4,30,0,52,4,19,0,6
 matchmaking-facade,matchmaking,Workflow,0,41,0,0,0,2,0,2,0,2
 matchmaking-facade,matchmaking,Workflow.Status,0,33,0,0,0,1,0,1,0,1
-matchmaking-facade,matchmaking,Store,18,102,1,5,1,17,1,6,0,4
+matchmaking-facade,matchmaking,Store,9,111,1,5,1,17,1,6,0,4
 matchmaking-facade,matchmaking,WorkflowRepository,0,98,0,2,0,15,0,4,0,3
 matchmaking-facade,matchmaking,StageRejected,0,4,0,0,0,1,0,1,0,1
 matchmaking-facade,matchmaking,AdminFacade,0,77,0,6,0,14,0,7,0,4

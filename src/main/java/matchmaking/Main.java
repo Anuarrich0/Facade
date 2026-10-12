@@ -17,18 +17,14 @@ public final class Main {
         MatchmakingFacade common = new MatchmakingFacade(parties, servers, matches, new WorkflowRepository(store));
         AdminFacade admin = new AdminFacade(common, parties, servers, matches);
         Scanner in = new Scanner(System.in);
-        String lastId = "";
-        System.out.println("\nMATCHMAKING - START A MATCH");
+        System.out.println("\nMATCHMAKING");
         System.out.println("Data folder: " + data.toAbsolutePath());
         while (true) {
             System.out.println("\n----------------------------------------");
-            System.out.println("1 - Start a match (all three steps)");
-            System.out.println("2 - Reserve a party (step A only)");
-            System.out.println("3 - Continue a request (next step)");
-            System.out.println("4 - View saved request status");
-            System.out.println("5 - Cancel a request");
-            System.out.println("6 - Demo: server failure (undo party reservation)");
-            System.out.println("7 - Demo: anti-cheat failure (release server, then cancel party)");
+            System.out.println("1 - Create a match request");
+            System.out.println("2 - Perform the next step");
+            System.out.println("3 - View saved status");
+            System.out.println("4 - Cancel a request");
             System.out.println("0 - Exit");
             System.out.print("Choose an option: ");
             if (!in.hasNextLine()) return;
@@ -37,52 +33,41 @@ public final class Main {
                 System.out.println("Goodbye. Your saved requests remain on disk.");
                 return;
             }
+            String id = null;
             try {
-                if (choice.equals("1") || choice.equals("2") || choice.equals("6") || choice.equals("7")) {
+                if (choice.equals("1")) {
                     String player = read(in, "Player name: ");
-                    while (player.isBlank()) player = read(in, "Name cannot be empty. Enter a player name: ");
-                    int rating = number(in, "Skill rating [0-3000]: ", 0, 3000);
-                    int size = number(in, "Party size [1-5 players]: ", 1, 5);
-                    boolean demo = choice.equals("6") || choice.equals("7");
-                    int ping = demo ? (choice.equals("6") ? 150 : 50)
-                            : number(in, "Ping in ms [0 or higher; above 120 fails the server check]: ", 0, Integer.MAX_VALUE);
-                    boolean suspicious = demo ? choice.equals("7") : yesNo(in);
-                    if (demo) System.out.println("Demo settings: ping=" + ping + " ms, suspicious player=" + (suspicious ? "yes" : "no"));
+                    int rating = number(in, "Skill rating [0-3000]: ");
+                    int size = number(in, "Party size [1-5]: ");
+                    int ping = number(in, "Ping in ms [above 120 rejects step B]: ");
+                    boolean suspicious = yesNo(in, "Suspicious player? [yes rejects step C; yes/no]: ");
+                    boolean runAll = yesNo(in, "Run all steps now? [yes/no; no stops after party reservation]: ");
                     Workflow flow = common.begin(player, rating, size, ping, suspicious);
-                    lastId = flow.id();
-                    System.out.println("\nRequest created. ID: " + lastId);
-                    System.out.println("Step A complete: party reserved.");
-                    showState(admin, lastId);
-                    if (!choice.equals("2")) {
-                        try {
-                            common.advance(lastId);
-                            System.out.println("\nStep B complete: server allocated.");
-                            showState(admin, lastId);
-                            common.advance(lastId);
-                            System.out.println("\nStep C complete: anti-cheat passed, match confirmed.");
-                        } catch (StageRejected e) { System.out.println("\nRequest rejected: " + reason(e)); }
-                        showState(admin, lastId);
-                    } else {
-                        System.out.println("Choose option 3 to continue. Press Enter at the ID prompt to use this request.");
+                    id = flow.id();
+                    System.out.println("Request created. ID: " + id);
+                    if (runAll) {
+                        common.advance(id);
+                        common.advance(id);
                     }
-                } else if (choice.equals("3") || choice.equals("4") || choice.equals("5")) {
-                    String id = read(in, "Request ID" + (lastId.isEmpty() ? ": " : " [Enter = last request]: "));
-                    if (id.isEmpty()) id = lastId;
-                    if (id.isEmpty()) { System.out.println("Create a request first, or enter an existing request ID."); continue; }
+                } else if (choice.equals("2") || choice.equals("3") || choice.equals("4")) {
+                    id = read(in, "Request ID: ");
                     common.require(id);
-                    lastId = id;
-                    try {
-                        if (choice.equals("3")) common.advance(id);
-                        if (choice.equals("5")) admin.compensate(id);
-                    } catch (StageRejected e) { System.out.println("Request rejected: " + reason(e)); }
-                    showState(admin, id);
-                } else System.out.println("Unknown option. Choose a number from the menu.");
+                    if (choice.equals("2")) common.advance(id);
+                    if (choice.equals("4")) admin.compensate(id);
+                } else {
+                    System.out.println("Choose 0, 1, 2, 3 or 4.");
+                    continue;
+                }
             } catch (NoSuchElementException e) {
                 return;
             } catch (StageRejected e) {
-                System.out.println("Request rejected: " + reason(e));
+                System.out.println("Request rejected: " + e.getMessage());
             } catch (RuntimeException e) {
                 System.out.println("Could not complete the action: " + e.getMessage());
+            }
+            if (id != null) {
+                try { showState(admin, id); }
+                catch (RuntimeException e) { System.out.println("Status unavailable: " + e.getMessage()); }
             }
         }
     }
@@ -92,19 +77,18 @@ public final class Main {
         return in.nextLine().trim();
     }
 
-    private static int number(Scanner in, String prompt, int min, int max) {
+    private static int number(Scanner in, String prompt) {
         while (true) {
             try {
-                int value = Integer.parseInt(read(in, prompt));
-                if (value >= min && value <= max) return value;
+                return Integer.parseInt(read(in, prompt));
             } catch (NumberFormatException ignored) { }
-            System.out.println("Enter a whole number from " + min + (max == Integer.MAX_VALUE ? " or higher." : " to " + max + "."));
+            System.out.println("Enter a whole number.");
         }
     }
 
-    private static boolean yesNo(Scanner in) {
+    private static boolean yesNo(Scanner in, String prompt) {
         while (true) {
-            String value = read(in, "Anti-cheat: is the player suspicious? [yes/no]: ");
+            String value = read(in, prompt);
             if (value.equalsIgnoreCase("yes") || value.equalsIgnoreCase("true")) return true;
             if (value.equalsIgnoreCase("no") || value.equalsIgnoreCase("false")) return false;
             System.out.println("Enter yes or no.");
@@ -140,16 +124,4 @@ public final class Main {
         }
     }
 
-    private static String reason(StageRejected error) {
-        String message = error.getMessage();
-        if (message.startsWith("Workflow not found:")) return "No request found with this ID.";
-        return switch (message) {
-            case "No suitable server: ping above 120 ms" -> "Ping exceeds 120 ms. No server allocated; party reservation cancelled.";
-            case "Anti-cheat rejected a suspicious player" -> "Anti-cheat rejected the player. Server released, then party reservation cancelled.";
-            case "Player name is required" -> "Enter a player name.";
-            case "Skill rating must be 0..3000" -> "Skill rating must be between 0 and 3000.";
-            case "Party size must be 1..5" -> "Party size must be between 1 and 5 players.";
-            default -> message;
-        };
-    }
 }
