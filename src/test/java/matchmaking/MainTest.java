@@ -33,7 +33,7 @@ class MainTest {
         assertTrue(output.contains("Enter a whole number."));
         assertTrue(output.contains("Match (C): confirmed"));
         String id = output.split("Request created. ID: ")[1].split("\\R")[0];
-        Workflow saved = new WorkflowRepository(new Store(disk)).find(id);
+        Workflow saved = new Store(disk).read("workflow", id, Workflow.class);
         assertEquals("Anuar", saved.player());
         assertEquals(Workflow.Status.COMPLETED, saved.status());
     }

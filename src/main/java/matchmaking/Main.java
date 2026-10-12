@@ -14,7 +14,7 @@ public final class Main {
         PartyService parties = new PartyService(new PartyRepository(store), new RatingRule());
         ServerService servers = new ServerService(new ServerRepository(store), new LatencyRule());
         MatchService matches = new MatchService(new MatchRepository(store), new AntiCheatRule());
-        MatchmakingFacade common = new MatchmakingFacade(parties, servers, matches, new WorkflowRepository(store));
+        MatchmakingFacade common = new MatchmakingFacade(parties, servers, matches, store);
         AdminFacade admin = new AdminFacade(common, parties, servers, matches);
         Scanner in = new Scanner(System.in);
         System.out.println("\nMATCHMAKING");

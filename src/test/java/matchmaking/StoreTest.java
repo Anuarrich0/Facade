@@ -14,12 +14,12 @@ class StoreTest {
 
     @Test void realJsonPreservesUnicodeQuotesNumbersAndBooleansAfterReopen() throws Exception {
         Workflow flow = new Workflow("game1", "Анвар \"Ace\"\nTeam", 1500, 2, 50, true, Workflow.Status.PENDING_C);
-        new WorkflowRepository(new Store(disk)).save(flow);
+        new Store(disk).write("workflow", flow.id(), flow);
         JsonObject json = JsonParser.parseString(Files.readString(disk.resolve("workflow/game1.json"))).getAsJsonObject();
         assertEquals(flow.player(), json.get("player").getAsString());
         assertTrue(json.getAsJsonPrimitive("rating").isNumber());
         assertTrue(json.getAsJsonPrimitive("suspicious").isBoolean());
-        assertEquals(flow, new WorkflowRepository(new Store(disk)).find("game1"));
+        assertEquals(flow, new Store(disk).read("workflow", "game1", Workflow.class));
     }
 
     @Test void replacingJsonPersistsNewStatusAndLeavesNoTemporaryFiles() throws Exception {

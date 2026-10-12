@@ -18,10 +18,8 @@
   <path d="M 1000 199 L 600 199" class="edge"/>
   <text x="722" y="190" class="small">requires / compensates</text>
 
-  <rect x="645" y="260" width="310" height="55" class="box"/><text x="713" y="294">WorkflowRepository</text>
-  <rect x="645" y="330" width="310" height="55" class="box"/><text x="760" y="364">Workflow</text>
+  <rect x="645" y="260" width="310" height="55" class="box"/><text x="760" y="294">Workflow</text>
   <path d="M 500 232 L 705 260" class="edge"/>
-  <path d="M 800 315 L 800 330" class="edge"/>
 
   <rect x="35" y="425" width="490" height="445" class="group"/>
   <text x="64" y="461" class="package">A  Party reservation</text>
@@ -55,6 +53,6 @@
   <path d="M 180 720 L 180 905 L 700 920" class="edge"/>
   <path d="M 800 720 L 800 920" class="edge"/>
   <path d="M 1420 720 L 1420 905 L 900 920" class="edge"/>
-  <path d="M 955 288 L 1570 288 L 1570 905 L 950 943" class="edge"/>
+  <path d="M 600 220 L 1570 220 L 1570 905 L 950 943" class="edge"/>
   <text x="30" y="985" class="small">Arrows show direct calls or persisted entity use. The three subsystems have no dependencies on each other.</text>
 </svg>

@@ -13,7 +13,7 @@ class MatchmakingTest {
 
     private Rig gameAt(Path path) { return new Rig(path); } // domain test language: gameAt(clean disk)
     private record Rig(MatchmakingFacade game, AdminFacade admin, PartyService party,
-                       ServerService server, MatchService match, WorkflowRepository progress) {
+                       ServerService server, MatchService match, Store store) {
         Rig(Path path) {
             this(new Store(path));
         }
@@ -21,10 +21,10 @@ class MatchmakingTest {
             this(new PartyService(new PartyRepository(store), new RatingRule()),
                     new ServerService(new ServerRepository(store), new LatencyRule()),
                     new MatchService(new MatchRepository(store), new AntiCheatRule()),
-                    new WorkflowRepository(store));
+                    store);
         }
-        private Rig(PartyService party, ServerService server, MatchService match, WorkflowRepository progress) {
-            this(new MatchmakingFacade(party, server, match, progress), null, party, server, match, progress);
+        private Rig(PartyService party, ServerService server, MatchService match, Store store) {
+            this(new MatchmakingFacade(party, server, match, store), null, party, server, match, store);
         }
         private Rig {
             if (admin == null) admin = new AdminFacade(game, party, server, match);
@@ -95,7 +95,7 @@ class MatchmakingTest {
     @Test void partiallyCompensatedStateIsFinishedAfterRestart() {
         Rig rig = gameAt(disk);
         Workflow flow = rig.game.run("Anuar", 1500, 1, 20, false);
-        rig.progress.save(flow.withStatus(Workflow.Status.COMPENSATING));
+        rig.store.write("workflow", flow.id(), flow.withStatus(Workflow.Status.COMPENSATING));
         rig.match.revoke(flow.id());
         assertEquals(Workflow.Status.COMPENSATED, gameAt(disk).game.advance(flow.id()).status());
         assertEquals(ServerAllocation.Status.RELEASED, rig.server.inspect(flow.id()).status());
