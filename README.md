@@ -2,16 +2,13 @@
 
 Variant 16: **Video Game Matchmaking**. A working Java console application coordinates party reservation (A), server allocation (B), and anti-cheat confirmation with a saved match record (C). The three subsystems are independent. Their state and the chain's progress are stored in JSON and survive an application restart.
 
-## Study material
+## UML class diagram
 
-- [Russian defense guide - PDF, 14 pages](output/pdf/Facade_Defense_Guide_RU.pdf): class roles, UML arrows, compensation, requirements, live demonstration, questions, and live coding preparation. No line-by-line code explanation.
-- [Readable Markdown version](docs/study-guide-ru.md).
-- [Complete class diagram](docs/class-diagram.svg): five large panels with all 18 main project classes. Repeated class names refer to the same classes, not extra subsystems.
-- Individual UML panels: [common facade](docs/uml/common.svg), [admin facade](docs/uml/admin.svg), [data and exceptions](docs/uml/data.svg), [A](docs/uml/party.svg), [B](docs/uml/server.svg), [C](docs/uml/match.svg).
+[Open the complete UML diagram](docs/class-diagram.svg). All 18 project classes are shown; repeated names represent the same class.
 
 ![Class diagram](docs/class-diagram.svg)
 
-The main diagram uses large class names and explicit roles, without fields or method lists. Solid arrows show stored references; dashed arrows show use or creation. Start with the two facade panels, then follow A, B, and C below. Constructor wiring in `Main` is omitted to keep the runtime relations readable. The separate data panel and PDF include inheritance and operation details. Rules and services throw `StageRejected`; the common facade catches B/C rejection and compensates it. Nested status enums and Java/Gson library types are not included in the count of 18 project classes.
+Solid arrows show stored references; dashed arrows show object use. Read the two facade panels first, then subsystems A, B and C below. Main constructs the dependencies; constructor wiring is omitted for clarity. Rules and services throw `StageRejected`; MatchmakingFacade catches B/C rejection and compensates completed steps.
 
 ## Build and run
 
