@@ -2,53 +2,46 @@
 <!DOCTYPE svg
   PUBLIC '-//W3C//DTD SVG 1.0//EN'
   'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
-<svg width="540" height="450" preserveAspectRatio="xMinYMin meet" viewBox="0 0 540 450" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="800" height="610" preserveAspectRatio="xMinYMin meet" viewBox="0 0 800 610" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
 	<title>...</title>
 	<desc>...</desc>
 	<clipPath id="clip">
-		<rect x="0" y="0" width="540" height="450"/>
+		<rect x="0" y="0" width="800" height="610"/>
 	</clipPath>
-	<g id="group" transform="scale(1,-1) translate(0,-450)" style="clip-path: url(#clip)">
+	<g id="group" transform="scale(1,-1) translate(0,-610)" style="clip-path: url(#clip)">
 		<g transform="">
-			<text x="12" y="432" style="font-family: Arial-Bold; font-size: 16px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,864) scale(1,-1)">2  Administrative facade</text>
-			<text x="12" y="414" style="font-family: Arial; font-size: 10px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,828) scale(1,-1)">The same service objects are reused; there are no extra subsystems.</text>
-			<rect x="185" y="345" width="170" height="50" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
-			<text x="194" y="376" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,752) scale(1,-1)">Main</text>
-			<path d="M 185,369 L 355,369 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
-			<text x="194" y="352" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,704) scale(1,-1)">+main(args)</text>
-			<rect x="100" y="225" width="340" height="80" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
-			<text x="109" y="286" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,572) scale(1,-1)">AdminFacade</text>
-			<path d="M 100,279 L 440,279 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
-			<text x="109" y="262" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,524) scale(1,-1)">-workflow; -parties; -servers; -matches</text>
-			<text x="109" y="248" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,496) scale(1,-1)">+inspect(id); +compensate(id)</text>
-			<polyline points="270 345, 270 305" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
-			<polygon points="270 305, 266 313, 274 313" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
-			<rect x="0" y="65" width="120" height="65" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
-			<text x="9" y="111" style="font-family: Arial-Bold; font-size: 10.369620253164557px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,222) scale(1,-1)">MatchmakingFacade</text>
-			<path d="M 0,104 L 120,104 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
-			<text x="9" y="87" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,174) scale(1,-1)">+require; +compensate</text>
-			<rect x="140" y="65" width="120" height="65" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
-			<text x="149" y="111" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,222) scale(1,-1)">PartyService</text>
-			<path d="M 140,104 L 260,104 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
-			<text x="149" y="87" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,174) scale(1,-1)">+inspect</text>
-			<rect x="280" y="65" width="120" height="65" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
-			<text x="289" y="111" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,222) scale(1,-1)">ServerService</text>
-			<path d="M 280,104 L 400,104 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
-			<text x="289" y="87" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,174) scale(1,-1)">+inspect</text>
-			<rect x="420" y="65" width="120" height="65" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
-			<text x="429" y="111" style="font-family: Arial-Bold; font-size: 11.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,222) scale(1,-1)">MatchService</text>
-			<path d="M 420,104 L 540,104 Z" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 0.7;"/>
-			<text x="429" y="87" style="font-family: Arial; font-size: 9.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,174) scale(1,-1)">+inspect</text>
-			<polyline points="170 225, 60 130" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
-			<polygon points="60 130, 63.4401 138.2563, 68.66906 132.2017" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
-			<polyline points="235 225, 200 130" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
-			<polygon points="200 130, 199.0123 138.8896, 206.519 136.1239" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
-			<polyline points="300 225, 340 130" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
-			<polygon points="340 130, 333.209 135.8209, 340.5821 138.9253" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
-			<polyline points="365 225, 480 130" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1.1; fill: None; fill-rule: evenodd;"/>
-			<polygon points="480 130, 471.2848 132.0112, 476.3798 138.1789" style="stroke: rgb(32%,38%,44%); stroke-linecap: butt; stroke-width: 1; fill: rgb(32%,38%,44%); fill-rule: evenodd;"/>
-			<text x="12" y="35" style="font-family: Arial; font-size: 11px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,70) scale(1,-1)">inspect: combines persisted states into one result.</text>
-			<text x="12" y="15" style="font-family: Arial; font-size: 10.5px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,30) scale(1,-1)">compensate: delegates the reverse sequence to the common facade.</text>
+			<text x="12" y="585" style="font-family: Arial-Bold; font-size: 22px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,1170) scale(1,-1)">2  Административный фасад</text>
+			<text x="12" y="561" style="font-family: Arial; font-size: 14px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,1122) scale(1,-1)">Просмотр состояния и ручная отмена существующего запроса.</text>
+			<rect x="235" y="473" width="330" height="62" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.7; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="369.642333984375" y="516" style="font-family: Arial; font-size: 13px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,1032) scale(1,-1)">&lt;&lt;client&gt;&gt;</text>
+			<text x="377.2216796875" y="490" style="font-family: Arial-Bold; font-size: 20px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,980) scale(1,-1)">Main</text>
+			<rect x="235" y="333" width="330" height="62" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.7; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="365.300537109375" y="376" style="font-family: Arial; font-size: 13px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,752) scale(1,-1)">&lt;&lt;facade&gt;&gt;</text>
+			<text x="334.4287109375" y="350" style="font-family: Arial-Bold; font-size: 20px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,700) scale(1,-1)">AdminFacade</text>
+			<polyline points="400 473, 400 395" style="stroke: rgb(30%,36%,43%); stroke-linecap: butt; stroke-width: 1.7; fill: None; fill-rule: evenodd; stroke-dasharray: 6, 4;"/>
+			<polygon points="400 395, 395 405, 405 405" style="stroke: rgb(30%,36%,43%); stroke-linecap: butt; stroke-width: 1; fill: rgb(30%,36%,43%); fill-rule: evenodd;"/>
+			<text x="420" y="433" style="font-family: Arial; font-size: 14px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,866) scale(1,-1)">inspect / compensate</text>
+			<rect x="0" y="58" width="185" height="62" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.7; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="57.800537109375" y="101" style="font-family: Arial; font-size: 13px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,202) scale(1,-1)">&lt;&lt;facade&gt;&gt;</text>
+			<text x="8.999999999999986" y="75" style="font-family: Arial-Bold; font-size: 16.9777115909655px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,150) scale(1,-1)">MatchmakingFacade</text>
+			<rect x="205" y="58" width="185" height="62" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.7; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="261.727783203125" y="101" style="font-family: Arial; font-size: 13px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,202) scale(1,-1)">&lt;&lt;service&gt;&gt;</text>
+			<text x="236.8994140625" y="75" style="font-family: Arial-Bold; font-size: 20px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,150) scale(1,-1)">PartyService</text>
+			<rect x="410" y="58" width="185" height="62" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.7; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="466.727783203125" y="101" style="font-family: Arial; font-size: 13px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,202) scale(1,-1)">&lt;&lt;service&gt;&gt;</text>
+			<text x="435.7763671875" y="75" style="font-family: Arial-Bold; font-size: 20px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,150) scale(1,-1)">ServerService</text>
+			<rect x="615" y="58" width="185" height="62" style="stroke: rgb(14%,34%,51%); stroke-linecap: butt; stroke-width: 1.7; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="671.727783203125" y="101" style="font-family: Arial; font-size: 13px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,202) scale(1,-1)">&lt;&lt;service&gt;&gt;</text>
+			<text x="643.0224609375" y="75" style="font-family: Arial-Bold; font-size: 20px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,150) scale(1,-1)">MatchService</text>
+			<polyline points="280 333, 92.5 120" style="stroke: rgb(30%,36%,43%); stroke-linecap: butt; stroke-width: 1.7; fill: None; fill-rule: evenodd;"/>
+			<polygon points="92.5 120, 95.35443 130.8098, 102.8605 124.2024" style="stroke: rgb(30%,36%,43%); stroke-linecap: butt; stroke-width: 1; fill: rgb(30%,36%,43%); fill-rule: evenodd;"/>
+			<polyline points="360 333, 297.5 120" style="stroke: rgb(30%,36%,43%); stroke-linecap: butt; stroke-width: 1.7; fill: None; fill-rule: evenodd;"/>
+			<polygon points="297.5 120, 295.5178 131.0032, 305.1133 128.1877" style="stroke: rgb(30%,36%,43%); stroke-linecap: butt; stroke-width: 1; fill: rgb(30%,36%,43%); fill-rule: evenodd;"/>
+			<polyline points="440 333, 502.5 120" style="stroke: rgb(30%,36%,43%); stroke-linecap: butt; stroke-width: 1.7; fill: None; fill-rule: evenodd;"/>
+			<polygon points="502.5 120, 494.8867 128.1877, 504.4822 131.0032" style="stroke: rgb(30%,36%,43%); stroke-linecap: butt; stroke-width: 1; fill: rgb(30%,36%,43%); fill-rule: evenodd;"/>
+			<polyline points="520 333, 707.5 120" style="stroke: rgb(30%,36%,43%); stroke-linecap: butt; stroke-width: 1.7; fill: None; fill-rule: evenodd;"/>
+			<polygon points="707.5 120, 697.1395 124.2024, 704.6456 130.8098" style="stroke: rgb(30%,36%,43%); stroke-linecap: butt; stroke-width: 1; fill: rgb(30%,36%,43%); fill-rule: evenodd;"/>
+			<text x="12" y="32" style="font-family: Arial; font-size: 14px;fill: rgb(9%,16%,27%); stroke:none;" transform="translate(0,64) scale(1,-1)">Отмену поручает основному фасаду; состояния читает у сервисов.</text>
 		</g>
 	</g>
 </svg>
