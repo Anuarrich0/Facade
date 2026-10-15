@@ -1,6 +1,7 @@
 package matchmaking;
 
 import java.nio.file.Path;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import matchmaking.party.*;
@@ -31,7 +32,8 @@ class MatchmakingTest {
         }
     }
 
-    @Test void aValidPartyBecomesAConfirmedMatch() {
+    @DisplayName("Матч завершается и сохраняется, если все проверки пройдены")
+    @Test void shouldCompleteAndSaveMatchWhenAllChecksPass() {
         Rig rig = gameAt(disk);
         Workflow flow = rig.game.run("Anuar", 1500, 3, 55, false);
         assertEquals(Workflow.Status.COMPLETED, flow.status());
@@ -41,7 +43,8 @@ class MatchmakingTest {
         assertEquals(Workflow.Status.COMPLETED, rig.game.advance(flow.id()).status());
     }
 
-    @Test void highLatencyAfterPartyReservationCancelsOnlyParty() {
+    @DisplayName("Группа отменяется, если пинг превышает 120 мс")
+    @Test void shouldCancelPartyWhenPingExceeds120Ms() {
         Rig rig = gameAt(disk);
         Workflow flow = rig.game.begin("Anuar", 1500, 2, 121, false);
         assertThrows(StageRejected.class, () -> rig.game.advance(flow.id()));
@@ -50,7 +53,8 @@ class MatchmakingTest {
         assertEquals(Workflow.Status.COMPENSATED, rig.game.advance(flow.id()).status());
     }
 
-    @Test void antiCheatAfterAllocationReleasesServerThenCancelsParty() {
+    @DisplayName("Отказ античита освобождает сервер и отменяет группу")
+    @Test void shouldReleaseServerAndCancelPartyWhenAntiCheatRejectsPlayer() {
         Rig rig = gameAt(disk);
         Workflow flow = rig.game.begin("Anuar", 1500, 2, 50, true);
         assertEquals(Workflow.Status.PENDING_C, rig.game.advance(flow.id()).status());
@@ -59,7 +63,8 @@ class MatchmakingTest {
                 gameAt(disk).admin.inspect(flow.id()));
     }
 
-    @Test void restartMidChainUsesSavedProgress() {
+    @DisplayName("После перезапуска подбор матча продолжается с сохранённого шага")
+    @Test void shouldContinueMatchFromSavedStepAfterRestart() {
         Workflow flow = gameAt(disk).game.begin("Anuar", 1000, 1, 30, false);
         Rig afterRestart = gameAt(disk);
         assertEquals(Workflow.Status.PENDING_B, afterRestart.game.require(flow.id()).status());
@@ -68,14 +73,16 @@ class MatchmakingTest {
         assertEquals(Workflow.Status.COMPLETED, gameAt(disk).game.advance(flow.id()).status());
     }
 
-    @Test void committedServerWithStaleProgressIsNotAllocatedTwice() {
+    @DisplayName("Уже сохранённый сервер не выделяется повторно при отставшем статусе запроса")
+    @Test void shouldReuseSavedServerWhenWorkflowStillWaitsForServer() {
         Rig rig = gameAt(disk);
         Workflow flow = rig.game.begin("Anuar", 1000, 1, 30, false);
         rig.server.allocate(flow.id(), 30); // crash after B wrote disk, before facade updated progress
         assertEquals(Workflow.Status.PENDING_C, gameAt(disk).game.advance(flow.id()).status());
     }
 
-    @Test void committedMatchWithStaleProgressIsNotConfirmedTwice() {
+    @DisplayName("Уже сохранённый матч не подтверждается повторно при отставшем статусе запроса")
+    @Test void shouldReuseSavedMatchWhenWorkflowStillWaitsForConfirmation() {
         Rig rig = gameAt(disk);
         Workflow flow = rig.game.begin("Anuar", 1000, 1, 30, false);
         rig.game.advance(flow.id());
@@ -83,7 +90,8 @@ class MatchmakingTest {
         assertEquals(Workflow.Status.COMPLETED, gameAt(disk).game.advance(flow.id()).status());
     }
 
-    @Test void adminCanCompensateCompletedMatchAndRepeatSafely() {
+    @DisplayName("Администратор может отменить готовый матч и безопасно повторить отмену")
+    @Test void shouldLetAdminCancelCompletedMatchAndRepeatCancellationSafely() {
         Rig rig = gameAt(disk);
         Workflow flow = rig.game.run("Anuar", 1500, 1, 20, false);
         assertEquals(Workflow.Status.COMPENSATED, gameAt(disk).admin.compensate(flow.id()).status());
@@ -92,7 +100,8 @@ class MatchmakingTest {
         assertEquals(Workflow.Status.COMPENSATED, rig.admin.compensate(flow.id()).status());
     }
 
-    @Test void partiallyCompensatedStateIsFinishedAfterRestart() {
+    @DisplayName("После перезапуска прерванная отмена доводится до конца")
+    @Test void shouldFinishInterruptedCancellationAfterRestart() {
         Rig rig = gameAt(disk);
         Workflow flow = rig.game.run("Anuar", 1500, 1, 20, false);
         rig.store.write("workflow", flow.id(), flow.withStatus(Workflow.Status.COMPENSATING));
@@ -101,7 +110,8 @@ class MatchmakingTest {
         assertEquals(ServerAllocation.Status.RELEASED, rig.server.inspect(flow.id()).status());
     }
 
-    @Test void invalidFirstStepCommitsNoParty() {
+    @DisplayName("Некорректное имя, рейтинг или размер группы вызывают отказ")
+    @Test void shouldRejectInvalidPlayerNameRatingOrPartySize() {
         Rig rig = gameAt(disk);
         assertThrows(StageRejected.class, () -> rig.game.begin("Anuar", -1, 1, 20, false));
         assertThrows(StageRejected.class, () -> rig.game.begin(" ", 1000, 1, 20, false));
@@ -110,7 +120,8 @@ class MatchmakingTest {
         assertThrows(StageRejected.class, () -> rig.game.begin(null, 1000, 1, 20, false));
     }
 
-    @Test void eachSubsystemWorksDirectlyAndEnforcesTransitions() {
+    @DisplayName("Подсистемы работают напрямую и запрещают недопустимые переходы состояний")
+    @Test void shouldAllowDirectSubsystemCallsAndRejectInvalidStateChanges() {
         Rig rig = gameAt(disk);
         PartyTicket party = rig.party.reserve("party1", "Anuar", 1500, 2);
         assertEquals(PartyTicket.Status.RESERVED, gameAt(disk).party.inspect("party1").status());
@@ -136,7 +147,8 @@ class MatchmakingTest {
         assertThrows(StageRejected.class, () -> rig.match.confirm("match1", false));
     }
 
-    @Test void unknownRecordsAndInvalidIdsFailClearly() {
+    @DisplayName("Отсутствующие записи и недопустимые ID вызывают исключения")
+    @Test void shouldRejectMissingRecordsAndInvalidIds() {
         Rig rig = gameAt(disk);
         assertThrows(StageRejected.class, () -> rig.game.require("missing"));
         assertThrows(StageRejected.class, () -> rig.party.cancel("missing"));

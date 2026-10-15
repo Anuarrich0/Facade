@@ -90,7 +90,7 @@ A checks a nonblank name, rating 0-3000, and party size 1-5. B accepts ping 0-12
 - B: NEW -> ALLOCATED -> RELEASED.
 - C: NEW -> CONFIRMED -> REVOKED.
 
-The entities reject illegal transitions themselves. None of the three subsystem packages imports another subsystem package. All remain directly usable without a facade, as demonstrated in `eachSubsystemWorksDirectlyAndEnforcesTransitions`.
+The entities reject illegal transitions themselves. None of the three subsystem packages imports another subsystem package. All remain directly usable without a facade, as demonstrated in `shouldAllowDirectSubsystemCallsAndRejectInvalidStateChanges`.
 
 ## JSON, recovery, and compensation
 
