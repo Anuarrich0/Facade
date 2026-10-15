@@ -23,6 +23,8 @@ public final class MatchmakingFacade {
     }
 
     public Workflow begin(String player, int rating, int partySize, int ping, boolean suspicious) {
+        if (player.length() > 30)
+            throw new StageRejected("Player name must not exceed 30 characters");
         if (player == null || player.isBlank()) throw new StageRejected("Player name is required");
         String id = UUID.randomUUID().toString();
         Workflow flow = new Workflow(id, player, rating, partySize, ping, suspicious, Workflow.Status.PENDING_B);
@@ -35,7 +37,7 @@ public final class MatchmakingFacade {
         }
         return flow;
     }
-
+    
     public Workflow run(String player, int rating, int partySize, int ping, boolean suspicious) {
         Workflow flow = begin(player, rating, partySize, ping, suspicious);
         return advance(advance(flow.id()).id());

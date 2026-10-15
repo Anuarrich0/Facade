@@ -13,6 +13,13 @@ Solid arrows show stored references; dashed arrows show object use. Read the two
 ## Build and run
 
 Requirements: Java 17+ and Maven 3.9+. The first build downloads dependencies.
+To run a clean build, all tests, and the JaCoCo coverage check on Windows:
+
+```powershell
+.\verify.cmd
+```
+
+This uses Windows short paths to avoid JaCoCo agent startup errors with Cyrillic user folders. Open `target/site/jacoco/index.html` after a successful build.
 
 ```powershell
 .\run.cmd
