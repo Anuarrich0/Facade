@@ -1,7 +1,6 @@
 package matchmaking;
 
 import java.nio.file.Path;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import matchmaking.party.*;
@@ -32,7 +31,6 @@ class MatchmakingTest {
         }
     }
 
-    @DisplayName("Матч завершается и сохраняется, если все проверки пройдены")
     @Test void shouldCompleteAndSaveMatchWhenAllChecksPass() {
         Rig rig = gameAt(disk);
         Workflow flow = rig.game.run("Anuar", 1500, 3, 55, false);
@@ -43,7 +41,6 @@ class MatchmakingTest {
         assertEquals(Workflow.Status.COMPLETED, rig.game.advance(flow.id()).status());
     }
 
-    @DisplayName("Группа отменяется, если пинг превышает 120 мс")
     @Test void shouldCancelPartyWhenPingExceeds120Ms() {
         Rig rig = gameAt(disk);
         Workflow flow = rig.game.begin("Anuar", 1500, 2, 121, false);
@@ -53,7 +50,6 @@ class MatchmakingTest {
         assertEquals(Workflow.Status.COMPENSATED, rig.game.advance(flow.id()).status());
     }
 
-    @DisplayName("Отказ античита освобождает сервер и отменяет группу")
     @Test void shouldReleaseServerAndCancelPartyWhenAntiCheatRejectsPlayer() {
         Rig rig = gameAt(disk);
         Workflow flow = rig.game.begin("Anuar", 1500, 2, 50, true);
@@ -63,7 +59,6 @@ class MatchmakingTest {
                 gameAt(disk).admin.inspect(flow.id()));
     }
 
-    @DisplayName("После перезапуска подбор матча продолжается с сохранённого шага")
     @Test void shouldContinueMatchFromSavedStepAfterRestart() {
         Workflow flow = gameAt(disk).game.begin("Anuar", 1000, 1, 30, false);
         Rig afterRestart = gameAt(disk);
@@ -73,7 +68,6 @@ class MatchmakingTest {
         assertEquals(Workflow.Status.COMPLETED, gameAt(disk).game.advance(flow.id()).status());
     }
 
-    @DisplayName("Уже сохранённый сервер не выделяется повторно при отставшем статусе запроса")
     @Test void shouldReuseSavedServerWhenWorkflowStillWaitsForServer() {
         Rig rig = gameAt(disk);
         Workflow flow = rig.game.begin("Anuar", 1000, 1, 30, false);
@@ -81,7 +75,6 @@ class MatchmakingTest {
         assertEquals(Workflow.Status.PENDING_C, gameAt(disk).game.advance(flow.id()).status());
     }
 
-    @DisplayName("Уже сохранённый матч не подтверждается повторно при отставшем статусе запроса")
     @Test void shouldReuseSavedMatchWhenWorkflowStillWaitsForConfirmation() {
         Rig rig = gameAt(disk);
         Workflow flow = rig.game.begin("Anuar", 1000, 1, 30, false);
@@ -90,7 +83,6 @@ class MatchmakingTest {
         assertEquals(Workflow.Status.COMPLETED, gameAt(disk).game.advance(flow.id()).status());
     }
 
-    @DisplayName("Администратор может отменить готовый матч и безопасно повторить отмену")
     @Test void shouldLetAdminCancelCompletedMatchAndRepeatCancellationSafely() {
         Rig rig = gameAt(disk);
         Workflow flow = rig.game.run("Anuar", 1500, 1, 20, false);
@@ -100,7 +92,6 @@ class MatchmakingTest {
         assertEquals(Workflow.Status.COMPENSATED, rig.admin.compensate(flow.id()).status());
     }
 
-    @DisplayName("После перезапуска прерванная отмена доводится до конца")
     @Test void shouldFinishInterruptedCancellationAfterRestart() {
         Rig rig = gameAt(disk);
         Workflow flow = rig.game.run("Anuar", 1500, 1, 20, false);
@@ -110,7 +101,6 @@ class MatchmakingTest {
         assertEquals(ServerAllocation.Status.RELEASED, rig.server.inspect(flow.id()).status());
     }
 
-    @DisplayName("Некорректное имя, рейтинг или размер группы вызывают отказ")
     @Test void shouldRejectInvalidPlayerNameRatingOrPartySize() {
         Rig rig = gameAt(disk);
         assertThrows(StageRejected.class, () -> rig.game.begin("Anuar", -1, 1, 20, false));
@@ -120,7 +110,6 @@ class MatchmakingTest {
         assertThrows(StageRejected.class, () -> rig.game.begin(null, 1000, 1, 20, false));
     }
 
-    @DisplayName("Подсистемы работают напрямую и запрещают недопустимые переходы состояний")
     @Test void shouldAllowDirectSubsystemCallsAndRejectInvalidStateChanges() {
         Rig rig = gameAt(disk);
         PartyTicket party = rig.party.reserve("party1", "Anuar", 1500, 2);
@@ -147,7 +136,6 @@ class MatchmakingTest {
         assertThrows(StageRejected.class, () -> rig.match.confirm("match1", false));
     }
 
-    @DisplayName("Отсутствующие записи и недопустимые ID вызывают исключения")
     @Test void shouldRejectMissingRecordsAndInvalidIds() {
         Rig rig = gameAt(disk);
         assertThrows(StageRejected.class, () -> rig.game.require("missing"));

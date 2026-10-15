@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,7 +28,6 @@ class MainTest {
         }
     }
 
-    @DisplayName("Меню повторно запрашивает неверный рейтинг и завершает матч после исправления")
     @Test void shouldAskForRatingAgainAndCompleteMatchAfterValidInput() {
         String output = operateMenu("1\nAnuar\ninvalid\n1500\n2\n50\nno\nyes\n0\n");
         assertTrue(output.contains("Enter a whole number."));
@@ -40,7 +38,6 @@ class MainTest {
         assertEquals(Workflow.Status.COMPLETED, saved.status());
     }
 
-    @DisplayName("Запросы из меню отменяются при высоком пинге или отказе античита")
     @Test void shouldCancelRequestsWhenMenuInputFailsPingOrAntiCheatChecks() {
         String output = operateMenu("1\nPlayer\n1500\n2\n150\nno\nyes\n1\nPlayer\n1500\n2\n50\nyes\nyes\n0\n");
         assertTrue(output.contains("ping above 120 ms"));
@@ -59,7 +56,6 @@ class MainTest {
         assertNull(store.read("match", c, matchmaking.match.MatchRecord.class));
     }
 
-    @DisplayName("Перезапущенное меню продолжает сохранённый запрос и показывает отмену")
     @Test void shouldResumeSavedRequestAfterMenuRestartAndShowCancellation() {
         String initial = operateMenu("1\nPlayer\n1500\n2\n50\nyes\nno\n0\n");
         String id = initial.split("Request created. ID: ")[1].split("\\R")[0];
